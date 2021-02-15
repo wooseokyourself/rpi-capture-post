@@ -10,7 +10,7 @@ using namespace cv;
 
 string getISOCurrentTimestamp ();
 void capture (Mat& frame, const int& width);
-bool post (const string& url, const string& fileName);
+bool post (const string& url, const string& time, const string& fileName);
 
 /**
  * @argv[1] - URL: string
@@ -35,7 +35,7 @@ int main (int argc, char* argv[]) {
         capture(frame, WIDTH);
         cout << "capture done. writing image" << endl;
         imwrite(FILENAME, frame);
-        post(URL, FILENAME);
+        post(URL, TIMESTAMP, FILENAME);
         cout << "post done" << endl;
     }
     system("rm -f *.jpg");
@@ -55,7 +55,7 @@ void capture (Mat& frame, const int& width) {
     cap.release();
 }
 
-bool post (const string& url, const string& fileName) {
+bool post (const string& url, const string& time, const string& fileName) {
     struct curl_httppost* formpost = NULL;
     struct curl_httppost* lastptr = NULL;
     struct curl_slist* headerlist = NULL;
@@ -66,7 +66,7 @@ bool post (const string& url, const string& fileName) {
     curl_formadd(&formpost,
                 &lastptr,
                 CURLFORM_COPYNAME, "time",
-                CURLFORM_COPYCONTENTS, fileName.c_str(),
+                CURLFORM_COPYCONTENTS, time.c_str(),
                 CURLFORM_END);
 
     curl_formadd(&formpost,
