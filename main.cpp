@@ -3,6 +3,7 @@
 #include <string>
 #include <opencv2/opencv.hpp>
 #include <curl/curl.h>
+#include "date.hpp"
 
 using namespace std;
 using namespace cv;
