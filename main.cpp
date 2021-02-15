@@ -23,6 +23,7 @@ int main (int argc, char* argv[]) {
         cout << "<arg1> - URL" << endl;
         cout << "<arg2> - Capture width size" << endl;
         cout << "<arg3> - Capture interval (ms)" << endl;
+        return -1;
     }
     const string URL = string(argv[1]);
     const int WIDTH = atoi(argv[2]);
