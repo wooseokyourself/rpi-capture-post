@@ -33,8 +33,10 @@ int main (int argc, char* argv[]) {
         const string FILENAME = convertToISOformat(getISOCurrentTimestamp()) + ".jpg";
         Mat frame;
         capture(frame, WIDTH);
+        cout << "capture done. writing image" << endl;
         imwrite(FILENAME, frame);
         post(URL, FILENAME);
+        cout << "post done" << endl;
     }
     system("rm -f *.jpg");
     return 0;
