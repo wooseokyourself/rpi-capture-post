@@ -48,17 +48,12 @@ string convertToISOformat (const string __timestamp) {
 }
 
 void capture (Mat& frame, const int& width) {
-    try {
-        VideoCapture cap;
-        cap.open(0);
-        cap.set(CAP_PROP_FRAME_WIDTH, width);
-        cap.set(CAP_PROP_FRAME_HEIGHT, int((float(width) / 4) * 3));
-        cap >> frame;
-        cap.release();
-    }
-    catch (Exception& e) {
-        cout << e << endl;
-    }
+    VideoCapture cap;
+    cap.open(0);
+    cap.set(CAP_PROP_FRAME_WIDTH, width);
+    cap.set(CAP_PROP_FRAME_HEIGHT, int((float(width) / 4) * 3));
+    cap >> frame;
+    cap.release();
 }
 
 bool post (const string& url, const string& fileName) {
