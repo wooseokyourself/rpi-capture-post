@@ -29,7 +29,7 @@ int main (int argc, char* argv[]) {
     const int WIDTH = atoi(argv[2]);
     const double INTERVAL = atof(argv[3]);
 
-    while (waitKey(INTERVAL) != -1) {
+    while (waitKey(INTERVAL) == -1) {
         const string FILENAME = convertToISOformat(getISOCurrentTimestamp()) + ".jpg";
         Mat frame;
         capture(frame, WIDTH);
