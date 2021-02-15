@@ -98,7 +98,7 @@ bool post (const string& url, const string& fileName) {
         while (res != CURLE_OK) {
             res = curl_easy_perform(curl);
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-            delay(2500);
+            waitKey(2500);
         }
         curl_easy_cleanup(curl);
         curl_formfree(formpost);
