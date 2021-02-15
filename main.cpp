@@ -9,7 +9,6 @@ using namespace std;
 using namespace cv;
 
 string getISOCurrentTimestamp ();
-string convertToISOformat (const string __timestamp);
 void capture (Mat& frame, const int& width);
 bool post (const string& url, const string& fileName);
 
@@ -30,7 +29,8 @@ int main (int argc, char* argv[]) {
     const double INTERVAL = atof(argv[3]);
 
     while (waitKey(INTERVAL) == -1) {
-        const string FILENAME = convertToISOformat(getISOCurrentTimestamp()) + ".jpg";
+        const string TIMESTAMP = getISOCurrentTimestamp();
+        const string FILENAME = TIMESTAMP.substr(0, 10) + ".jpg"; // yyyy-mm-dd.jpg
         Mat frame;
         capture(frame, WIDTH);
         cout << "capture done. writing image" << endl;
@@ -44,10 +44,6 @@ int main (int argc, char* argv[]) {
 
 string getISOCurrentTimestamp () {
     return date::format("%FT%TZ", date::floor<std::chrono::milliseconds>(std::chrono::system_clock::now()));
-}
-
-string convertToISOformat (const string __timestamp) {
-    return __timestamp.substr(0, 10);
 }
 
 void capture (Mat& frame, const int& width) {
