@@ -28,11 +28,11 @@ int main (int argc, char* argv[]) {
     const double INTERVAL = atof(argv[3]);
 
     while (waitKey(INTERVAL) != -1) {
-        const string FILENAME = getISOformat() + ".jpg";
+        const string FILENAME = convertToISOformat(getISOCurrentTimestamp()) + ".jpg";
         Mat frame;
         capture(frame, WIDTH);
         imwrite(FILENAME, frame);
-        post(FILENAME);
+        post(URL, FILENAME);
     }
     system("rm -f *.jpg");
     return 0;
@@ -56,11 +56,11 @@ void capture (Mat& frame, const int& width) {
         cap.release();
     }
     catch (Exception& e) {
-        vision::__Assert(false, FAILURE_READING);
+        cout << e << endl;
     }
 }
 
-string post (const string& url, const string& fileName) {
+bool post (const string& url, const string& fileName) {
     struct curl_httppost* formpost = NULL;
     struct curl_httppost* lastptr = NULL;
     struct curl_slist* headerlist = NULL;
