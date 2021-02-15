@@ -68,6 +68,12 @@ bool post (const string& url, const string& fileName) {
     curl_global_init(CURL_GLOBAL_ALL);
 
     curl_formadd(&formpost,
+                &lastptr,
+                CURLFORM_COPYNAME, "time",
+                CURLFORM_COPYCONTENTS, fileName.c_str(),
+                CURLFORM_END);
+
+    curl_formadd(&formpost,
                  &lastptr,
                  CURLFORM_COPYNAME, "filename",
                  CURLFORM_COPYCONTENTS, fileName.c_str(),
